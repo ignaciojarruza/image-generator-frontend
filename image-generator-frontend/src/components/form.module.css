@@ -1,0 +1,12 @@
+.modernForm {
+  display: flex;
+  justify-content: space-between;
+}
+.modernInput {
+  width: 60%;
+  font-size: 16px;
+  text-align: center;
+}
+.modernButton {
+  width: 50%;
+}

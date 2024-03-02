@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./form.module.css";
 
 export default function Form() {
   const [image_description, setDescription] = useState("");
@@ -7,13 +8,16 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.modernForm} onSubmit={handleSubmit}>
       <input
+        className={styles.modernInput}
         type="text"
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Enter Image Description..."
       />
-      <button type="submit">Generate!</button>
+      <button className={styles.modernButton} type="submit">
+        Generate!
+      </button>
     </form>
   );
 }
