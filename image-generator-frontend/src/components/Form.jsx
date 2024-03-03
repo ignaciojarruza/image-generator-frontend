@@ -11,6 +11,7 @@ export default function Form() {
         `http://localhost:3000/generate/${image_description}`
       );
       const data = await response.json();
+      setImageUrl(data.image_url);
       console.log(data.image_url);
     } catch (error) {
       console.error("Error generating Image:", error);
@@ -34,6 +35,7 @@ export default function Form() {
           Generate!
         </button>
       </form>
+      {image_url && <img src={image_url} alt="Generated Image" />}
     </div>
   );
 }
