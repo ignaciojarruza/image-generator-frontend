@@ -4,17 +4,23 @@ import styles from "./form.module.css";
 export default function Form() {
   const [image_description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const generateImage = async () => {
+    setLoading(true);
     try {
+      setLoading(true);
       const response = await fetch(
         `http://localhost:3000/generate/${image_description}`
       );
       const data = await response.json();
+      setLoading(false);
       setImageUrl(data.image_url);
       console.log(data.image_url);
+      setLoading(false);
     } catch (error) {
       console.error("Error generating Image:", error);
+      setLoading(false);
     }
   };
   function handleSubmit(e) {
@@ -35,7 +41,20 @@ export default function Form() {
           Generate!
         </button>
       </form>
-      {image_url && <img src={image_url} alt="Generated Image" />}
+      {isLoading ? (
+        <div className={styles.loading}>
+          <p>Loading...</p>
+          <p>Wait until image is generated.</p>
+        </div>
+      ) : (
+        image_url && (
+          <img
+            className={styles.modernImage}
+            src={image_url}
+            alt="Generated Image"
+          />
+        )
+      )}
     </div>
   );
 }
