@@ -1,13 +1,13 @@
-import { useState } from "react";
 import Form from "./components/Form";
+import Header from "./components/Header";
 import styles from "./app.module.css";
 
 function App() {
   return (
-    <>
-      <h1 className={styles.app}>Dall-e-3 Image Generator</h1>
+    <div className={styles.app}>
+      <Header />
       <Form />
-    </>
+    </div>
   );
 }
 
