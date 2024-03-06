@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./form.module.css";
 import Loading from "./Loading";
+import GeneratedImage from "./GeneratedImage";
 
 export default function Form() {
   const [image_description, setDescription] = useState("");
@@ -17,7 +18,6 @@ export default function Form() {
       const data = await response.json();
       setLoading(false);
       setImageUrl(data.image_url);
-      console.log(data.image_url);
       setLoading(false);
     } catch (error) {
       console.error("Error generating Image:", error);
@@ -43,17 +43,10 @@ export default function Form() {
           Generate!
         </button>
       </form>
-      here
       {isLoading ? (
         <Loading />
       ) : (
-        image_url && (
-          <img
-            className={styles.modernImage}
-            src={image_url}
-            alt="Generated Image"
-          />
-        )
+        image_url && <GeneratedImage image_url={image_url} />
       )}
     </div>
   );
