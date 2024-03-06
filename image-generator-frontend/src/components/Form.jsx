@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./form.module.css";
+import Loading from "./Loading";
 
 export default function Form() {
   const [image_description, setDescription] = useState("");
@@ -42,11 +43,9 @@ export default function Form() {
           Generate!
         </button>
       </form>
+      here
       {isLoading ? (
-        <div className={styles.loading}>
-          <p>Loading...</p>
-          <p>Wait until image is generated.</p>
-        </div>
+        <Loading />
       ) : (
         image_url && (
           <img
