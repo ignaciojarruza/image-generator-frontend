@@ -12,9 +12,13 @@ export default function Form() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await fetch(
-        `http://localhost:3000/generate/${image_description}`
-      );
+      const response = await fetch(`http://localhost:3000/generate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image_description: image_description }),
+      });
       const data = await response.json();
       setLoading(false);
       setImageUrl(data.image_url);
