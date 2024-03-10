@@ -20,7 +20,7 @@ export default function Form() {
           "Content-Type": "application/json",
         },
         //Modify here: change to prompt
-        body: JSON.stringify({ image_description: image_description }),
+        body: JSON.stringify(prompt),
       });
       const data = await response.json();
       setLoading(false);
@@ -35,12 +35,13 @@ export default function Form() {
   function handleSubmit(e) {
     e.preventDefault();
     setImageUrl("");
-    generateImage();
+    //generateImage();
+    console.log(prompt);
   }
 
   //Adding prompt here
   function handleOptionChange(e) {
-    setPrompt(...prompt, (model = e.target.value));
+    setPrompt({ ...prompt, model: e.target.value });
   }
 
   return (
@@ -50,7 +51,7 @@ export default function Form() {
           className={styles.modernInput}
           type="text"
           onChange={(e) =>
-            setPrompt(...prompt, (image_description = e.target.value))
+            setPrompt({ ...prompt, image_description: e.target.value })
           }
           placeholder="Enter Image Description..."
         />
@@ -58,13 +59,13 @@ export default function Form() {
           <input
             type="radio"
             value="dall-e-2"
-            checked={selectedOption === "dall-e-2"}
+            checked={setPrompt({ ...prompt, model: "dall-e-2" })}
             onChange={handleOptionChange}
           />
           <input
             type="radio"
             value="dall-e-3"
-            checked={selectedOption === "dall-e-3"}
+            checked={setPrompt({ ...prompt, model: "dall-e-3" })}
             onChange={handleOptionChange}
           />
         </label>
